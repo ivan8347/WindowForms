@@ -25,14 +25,39 @@ namespace Clock
                 labelTime.Text += $"\n{DateTime.Now.ToString("yyyy.MM.dd")}";
             if (checkBoxWeekDay.Checked)
                 labelTime.Text += $"\n{DateTime.Now.DayOfWeek}";
-
-
         }
-
+        // void SetVisiblity(bool visible)
+        // {
+        //checkBoxShowDate.Visible = visible;
+        //checkBoxWeekDay.Visible =  visible;
+        //    this.FormBorderStyle = FormBorderStyle.None;
+            
+        //    this.TransparencyKey = this.BackColor;
+        //    buttonHideControls.Visible = false;
+        //    //this.ShowInTaskbar = false;
+        //}
         private void buttonHideControls_Click(object sender, EventArgs e)
         {
             checkBoxShowDate.Visible = false;
             checkBoxWeekDay.Visible = false;
+            this.FormBorderStyle = FormBorderStyle.None;
+            
+            this.TransparencyKey = this.BackColor;
+            buttonHideControls.Visible = false;
+            //this.ShowInTaskbar = false;
         }
+
+        private void labelTime_DoubleClick(object sender, EventArgs e)
+        {
+            checkBoxShowDate.Visible = true;
+            checkBoxWeekDay.Visible =  true;
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+
+            this.TransparencyKey = Color.Empty;
+            buttonHideControls.Visible = false;
+            this.ShowInTaskbar = true;
+        }
+
+        
     }
 }
