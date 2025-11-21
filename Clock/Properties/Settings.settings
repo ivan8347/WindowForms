@@ -35,5 +35,14 @@
     <Setting Name="ShowWeekDay" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="UseCustomFont" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RunOnStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomFontName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Digital-7 Mono</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

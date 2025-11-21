@@ -154,5 +154,41 @@ namespace Clock.Properties {
                 this["ShowWeekDay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseCustomFont {
+            get {
+                return ((bool)(this["UseCustomFont"]));
+            }
+            set {
+                this["UseCustomFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RunOnStartup {
+            get {
+                return ((bool)(this["RunOnStartup"]));
+            }
+            set {
+                this["RunOnStartup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Digital-7 Mono")]
+        public string CustomFontName {
+            get {
+                return ((string)(this["CustomFontName"]));
+            }
+            set {
+                this["CustomFontName"] = value;
+            }
+        }
     }
 }

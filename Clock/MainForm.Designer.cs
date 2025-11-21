@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.TopMost = Properties.Settings.Default.IsTopMost;
+
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.labelTime = new System.Windows.Forms.Label();
@@ -44,7 +46,9 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiChooseFont = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiWindows = new System.Windows.Forms.ToolStripMenuItem();
-            this.castomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCastom = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDigital = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDoom = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiColors = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiForegroundColor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +72,7 @@
             this.labelTime.ContextMenuStrip = this.contextMenuStrip;
             this.labelTime.Font = new System.Drawing.Font("Old English Text MT", 31.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTime.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.labelTime.Location = new System.Drawing.Point(38, -2);
+            this.labelTime.Location = new System.Drawing.Point(-4, -1);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(250, 63);
             this.labelTime.TabIndex = 0;
@@ -128,6 +132,7 @@
             // 
             // tsmiTopmost
             // 
+
             this.tsmiTopmost.CheckOnClick = true;
             this.tsmiTopmost.Name = "tsmiTopmost";
             this.tsmiTopmost.Size = new System.Drawing.Size(299, 32);
@@ -172,23 +177,44 @@
             // 
             this.tsmiChooseFont.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiWindows,
-            this.castomToolStripMenuItem});
+            this.tsmiCastom});
             this.tsmiChooseFont.Name = "tsmiChooseFont";
             this.tsmiChooseFont.Size = new System.Drawing.Size(299, 32);
             this.tsmiChooseFont.Text = "Choose Font";
             // 
             // tsmiWindows
             // 
+            this.tsmiWindows.CheckOnClick = true;
             this.tsmiWindows.Name = "tsmiWindows";
             this.tsmiWindows.Size = new System.Drawing.Size(224, 32);
             this.tsmiWindows.Text = "windows";
             this.tsmiWindows.Click += new System.EventHandler(this.tsmiWindows_Click);
             // 
-            // castomToolStripMenuItem
+            // tsmiCastom
             // 
-            this.castomToolStripMenuItem.Name = "castomToolStripMenuItem";
-            this.castomToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
-            this.castomToolStripMenuItem.Text = "castom";
+            this.tsmiCastom.CheckOnClick = true;
+            this.tsmiCastom.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDigital,
+            this.tsmiDoom});
+            this.tsmiCastom.Name = "tsmiCastom";
+            this.tsmiCastom.Size = new System.Drawing.Size(224, 32);
+            this.tsmiCastom.Text = "castom";
+            // 
+            // tsmiDigital
+            // 
+            this.tsmiDigital.CheckOnClick = true;
+            this.tsmiDigital.Name = "tsmiDigital";
+            this.tsmiDigital.Size = new System.Drawing.Size(224, 32);
+            this.tsmiDigital.Text = "Digital";
+            this.tsmiDigital.Click += new System.EventHandler(this.tsmiDigital_Click);
+            // 
+            // tsmiDoom
+            // 
+            this.tsmiDoom.CheckOnClick = true;
+            this.tsmiDoom.Name = "tsmiDoom";
+            this.tsmiDoom.Size = new System.Drawing.Size(224, 32);
+            this.tsmiDoom.Text = "Doom";
+            this.tsmiDoom.Click += new System.EventHandler(this.tsmiDoom_Click);
             // 
             // tsmiColors
             // 
@@ -222,6 +248,7 @@
             this.tsmiAutostart.Name = "tsmiAutostart";
             this.tsmiAutostart.Size = new System.Drawing.Size(299, 32);
             this.tsmiAutostart.Text = "Run on Windows startup";
+            this.tsmiAutostart.Click += new System.EventHandler(this.tsmiAutostart_Click);
             // 
             // toolStripSeparator5
             // 
@@ -244,7 +271,7 @@
             // 
             this.checkBoxShowDate.AutoSize = true;
             this.checkBoxShowDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxShowDate.Location = new System.Drawing.Point(87, 429);
+            this.checkBoxShowDate.Location = new System.Drawing.Point(-4, 429);
             this.checkBoxShowDate.Name = "checkBoxShowDate";
             this.checkBoxShowDate.Size = new System.Drawing.Size(226, 36);
             this.checkBoxShowDate.TabIndex = 1;
@@ -256,7 +283,7 @@
             // 
             this.checkBoxShowWeekDay.AutoSize = true;
             this.checkBoxShowWeekDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxShowWeekDay.Location = new System.Drawing.Point(87, 397);
+            this.checkBoxShowWeekDay.Location = new System.Drawing.Point(-4, 387);
             this.checkBoxShowWeekDay.Name = "checkBoxShowWeekDay";
             this.checkBoxShowWeekDay.Size = new System.Drawing.Size(333, 36);
             this.checkBoxShowWeekDay.TabIndex = 2;
@@ -268,7 +295,7 @@
             // buttonHideControls
             // 
             this.buttonHideControls.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonHideControls.Location = new System.Drawing.Point(87, 471);
+            this.buttonHideControls.Location = new System.Drawing.Point(-4, 461);
             this.buttonHideControls.Name = "buttonHideControls";
             this.buttonHideControls.Size = new System.Drawing.Size(355, 82);
             this.buttonHideControls.TabIndex = 3;
@@ -289,7 +316,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(397, 565);
+            this.ClientSize = new System.Drawing.Size(465, 565);
             this.Controls.Add(this.buttonHideControls);
             this.Controls.Add(this.checkBoxShowWeekDay);
             this.Controls.Add(this.checkBoxShowDate);
@@ -332,7 +359,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAutostart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsmiWindows;
-        private System.Windows.Forms.ToolStripMenuItem castomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCastom;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDigital;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDoom;
     }
 }
 
