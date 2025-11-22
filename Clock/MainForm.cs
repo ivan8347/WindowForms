@@ -16,13 +16,17 @@ namespace Clock
     {
         ColorDialog backgrountDialog;
         ColorDialog foregroundDialog;
-        private bool Hour24 = true;
+      
         public MainForm()
         {
             InitializeComponent();
-             backgrountDialog
-             foregroundDialog;
+            
             SetVisibility(false);
+            backgrountDialog = new ColorDialog();
+            foregroundDialog = new ColorDialog();
+
+            var screen = Screen.PrimaryScreen.WorkingArea;
+            this.Location = new Point(screen.Right - this.Width, screen.Top);
 
         }
         private void timer_Tick(object sender, EventArgs e)
@@ -76,22 +80,17 @@ namespace Clock
           tsmiShowWeekDay.Checked = (sender as CheckBox).Checked;
         private void tsmiShowControls_Click(object sender, EventArgs e) =>
            SetVisibility(tsmiShowControls.Checked);
-       /* private void tsmi_12_Click(object sender, EventArgs e)
+
+        private void tsmiBackgroundColor_Click(object sender, EventArgs e)
         {
-            Hour24 = false;
-            tsmi_12.Checked = true;
-            tsmi_24.Checked = false;
+            if(backgrountDialog.ShowDialog() == DialogResult.OK)    
+            labelTime.BackColor = backgrountDialog.Color;
         }
 
-        private void tsmi_24_Click(object sender, EventArgs e)
+        private void tsmiForegroundColor_Click(object sender, EventArgs e)
         {
-            Hour24 = true;
-            tsmi_12.Checked = false;
-            tsmi_24.Checked = true;
-        }*/
-
-
-
-
+            if(foregroundDialog.ShowDialog() == DialogResult.OK)    
+                labelTime.ForeColor = foregroundDialog.Color;
+        }
     }
 }

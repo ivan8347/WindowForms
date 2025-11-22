@@ -92,7 +92,7 @@
             this.toolStripSeparator5,
             this.tsmiQuit});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(300, 350);
+            this.contextMenuStrip.Size = new System.Drawing.Size(300, 322);
             // 
             // timeFormatToolStripMenuItem
             // 
@@ -106,14 +106,13 @@
             // tsmi_12
             // 
             this.tsmi_12.Name = "tsmi_12";
-            this.tsmi_12.Size = new System.Drawing.Size(224, 32);
+            this.tsmi_12.Size = new System.Drawing.Size(179, 32);
             this.tsmi_12.Text = "12 - hour";
-            this.tsmi_12.Click += new System.EventHandler(this.tsmi_12_Click);
             // 
             // tsmi_24
             // 
             this.tsmi_24.Name = "tsmi_24";
-            this.tsmi_24.Size = new System.Drawing.Size(224, 32);
+            this.tsmi_24.Size = new System.Drawing.Size(179, 32);
             this.tsmi_24.Text = "24 - hour";
             // 
             // toolStripSeparator1
@@ -183,12 +182,14 @@
             this.tsmiForegroundColor.Name = "tsmiForegroundColor";
             this.tsmiForegroundColor.Size = new System.Drawing.Size(256, 32);
             this.tsmiForegroundColor.Text = "Foreground Color";
+            this.tsmiForegroundColor.Click += new System.EventHandler(this.tsmiForegroundColor_Click);
             // 
             // tsmiBackgroundColor
             // 
             this.tsmiBackgroundColor.Name = "tsmiBackgroundColor";
             this.tsmiBackgroundColor.Size = new System.Drawing.Size(256, 32);
             this.tsmiBackgroundColor.Text = "Background Color";
+            this.tsmiBackgroundColor.Click += new System.EventHandler(this.tsmiBackgroundColor_Click);
             // 
             // toolStripSeparator7
             // 
@@ -272,9 +273,11 @@
             this.Controls.Add(this.checkBoxShowWeekDay);
             this.Controls.Add(this.checkBoxShowDate);
             this.Controls.Add(this.labelTime);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Clock_SPU_411";
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
