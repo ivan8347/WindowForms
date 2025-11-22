@@ -11,20 +11,25 @@ using System.Windows.Forms;
 
 namespace Clock
 {
+
     public partial class MainForm : Form
     {
+        ColorDialog backgrountDialog;
+        ColorDialog foregroundDialog;
         private bool Hour24 = true;
         public MainForm()
         {
             InitializeComponent();
+             backgrountDialog
+             foregroundDialog;
             SetVisibility(false);
 
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (Hour24)
-                labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
-            else
+            //if (Hour24)
+            //    labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            //else
                 labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
 
             if (checkBoxShowWeekDay.Checked)
@@ -40,7 +45,7 @@ namespace Clock
             buttonHideControls.Visible = visible;
             this.FormBorderStyle = visible ? FormBorderStyle.FixedToolWindow : FormBorderStyle.None;
             this.TransparencyKey = visible ? Color.Empty : this.BackColor;
-            this.ShowInTaskbar = visible;
+           // this.ShowInTaskbar = visible;
         }
         private void buttonHideControls_Click(object sender, EventArgs e)
         {
@@ -71,7 +76,7 @@ namespace Clock
           tsmiShowWeekDay.Checked = (sender as CheckBox).Checked;
         private void tsmiShowControls_Click(object sender, EventArgs e) =>
            SetVisibility(tsmiShowControls.Checked);
-        private void tsmi_12_Click(object sender, EventArgs e)
+       /* private void tsmi_12_Click(object sender, EventArgs e)
         {
             Hour24 = false;
             tsmi_12.Checked = true;
@@ -83,6 +88,10 @@ namespace Clock
             Hour24 = true;
             tsmi_12.Checked = false;
             tsmi_24.Checked = true;
-        }
+        }*/
+
+
+
+
     }
 }
