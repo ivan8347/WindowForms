@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TopMost = Properties.Settings.Default.IsTopMost;
-
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.labelTime = new System.Windows.Forms.Label();
@@ -98,7 +96,7 @@
             this.toolStripSeparator5,
             this.tsmiQuit});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(300, 350);
+            this.contextMenuStrip.Size = new System.Drawing.Size(300, 322);
             // 
             // timeFormatToolStripMenuItem
             // 
@@ -132,7 +130,6 @@
             // 
             // tsmiTopmost
             // 
-
             this.tsmiTopmost.CheckOnClick = true;
             this.tsmiTopmost.Name = "tsmiTopmost";
             this.tsmiTopmost.Size = new System.Drawing.Size(299, 32);
@@ -186,7 +183,7 @@
             // 
             this.tsmiWindows.CheckOnClick = true;
             this.tsmiWindows.Name = "tsmiWindows";
-            this.tsmiWindows.Size = new System.Drawing.Size(224, 32);
+            this.tsmiWindows.Size = new System.Drawing.Size(174, 32);
             this.tsmiWindows.Text = "windows";
             this.tsmiWindows.Click += new System.EventHandler(this.tsmiWindows_Click);
             // 
@@ -197,14 +194,14 @@
             this.tsmiDigital,
             this.tsmiDoom});
             this.tsmiCastom.Name = "tsmiCastom";
-            this.tsmiCastom.Size = new System.Drawing.Size(224, 32);
+            this.tsmiCastom.Size = new System.Drawing.Size(174, 32);
             this.tsmiCastom.Text = "castom";
             // 
             // tsmiDigital
             // 
             this.tsmiDigital.CheckOnClick = true;
             this.tsmiDigital.Name = "tsmiDigital";
-            this.tsmiDigital.Size = new System.Drawing.Size(224, 32);
+            this.tsmiDigital.Size = new System.Drawing.Size(156, 32);
             this.tsmiDigital.Text = "Digital";
             this.tsmiDigital.Click += new System.EventHandler(this.tsmiDigital_Click);
             // 
@@ -212,7 +209,7 @@
             // 
             this.tsmiDoom.CheckOnClick = true;
             this.tsmiDoom.Name = "tsmiDoom";
-            this.tsmiDoom.Size = new System.Drawing.Size(224, 32);
+            this.tsmiDoom.Size = new System.Drawing.Size(156, 32);
             this.tsmiDoom.Text = "Doom";
             this.tsmiDoom.Click += new System.EventHandler(this.tsmiDoom_Click);
             // 
@@ -321,10 +318,12 @@
             this.Controls.Add(this.checkBoxShowWeekDay);
             this.Controls.Add(this.checkBoxShowDate);
             this.Controls.Add(this.labelTime);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Clock_SPU_411";
+            this.TopMost = global::Clock.Properties.Settings.Default.IsTopMost;
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
