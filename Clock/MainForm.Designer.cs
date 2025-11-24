@@ -41,6 +41,7 @@
             this.tsmiShowDate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowWeekDay = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowControls = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowConsole = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiChooseFont = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiColors = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +85,7 @@
             this.tsmiShowDate,
             this.tsmiShowWeekDay,
             this.tsmiShowControls,
+            this.tsmiShowConsole,
             this.toolStripSeparator4,
             this.tsmiChooseFont,
             this.tsmiColors,
@@ -92,7 +94,7 @@
             this.toolStripSeparator5,
             this.tsmiQuit});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(300, 322);
+            this.contextMenuStrip.Size = new System.Drawing.Size(300, 382);
             // 
             // timeFormatToolStripMenuItem
             // 
@@ -157,6 +159,14 @@
             this.tsmiShowControls.Text = "Show controls";
             this.tsmiShowControls.Click += new System.EventHandler(this.tsmiShowControls_Click);
             // 
+            // tsmiShowConsole
+            // 
+            this.tsmiShowConsole.CheckOnClick = true;
+            this.tsmiShowConsole.Name = "tsmiShowConsole";
+            this.tsmiShowConsole.Size = new System.Drawing.Size(299, 32);
+            this.tsmiShowConsole.Text = "ShowConsole";
+            this.tsmiShowConsole.CheckedChanged += new System.EventHandler(this.tsmiShowConsole_CheckedChanged);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -167,6 +177,7 @@
             this.tsmiChooseFont.Name = "tsmiChooseFont";
             this.tsmiChooseFont.Size = new System.Drawing.Size(299, 32);
             this.tsmiChooseFont.Text = "Choose font";
+            this.tsmiChooseFont.Click += new System.EventHandler(this.tsmiChooseFont_Click);
             // 
             // tsmiColors
             // 
@@ -312,6 +323,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiBackgroundColor;
         private System.Windows.Forms.ToolStripMenuItem tsmiAutostart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShowConsole;
     }
 }
 

@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Clock
 {
@@ -16,7 +17,7 @@ namespace Clock
     {
         ColorDialog backgrountDialog;
         ColorDialog foregroundDialog;
-      
+        ChooseFont fontDialog;
         public MainForm()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Clock
             SetVisibility(false);
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
+            fontDialog = new ChooseFont();
 
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(screen.Right - this.Width, screen.Top);
@@ -92,5 +94,21 @@ namespace Clock
             if(foregroundDialog.ShowDialog() == DialogResult.OK)    
                 labelTime.ForeColor = foregroundDialog.Color;
         }
+        private void tsmiChooseFont_Click(object sender, EventArgs e)
+        {
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+
+                labelTime.Font = fontDialog.Font;
+        }
+        [DllImport("kernel32.dll")]
+        public static extern bool AllocConsole();
+        [DllImport("kernel32.dll")]
+        public static extern bool FreeConsole();
+
+        private void tsmiShowConsole_CheckedChanged(object sender, EventArgs e)
+        {
+            bool console = (sender as ToolStripMenuItem).Checked ? AllocConsole() : FreeConsole();
+        }
+
     }
 }
