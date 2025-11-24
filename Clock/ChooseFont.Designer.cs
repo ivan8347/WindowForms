@@ -55,6 +55,12 @@
             this.numericUpDownFontSize.Size = new System.Drawing.Size(120, 38);
             this.numericUpDownFontSize.TabIndex = 1;
             this.numericUpDownFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownFontSize.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.numericUpDownFontSize.ValueChanged += new System.EventHandler(this.numericUpDownFontSize_ValueChanged);
             // 
             // labelExample
             // 

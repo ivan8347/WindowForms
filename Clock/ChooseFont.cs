@@ -24,6 +24,8 @@ namespace Clock
         {
             InitializeComponent();
            LoadFonts();
+            comboBoxFont.SelectedIndex = 0;
+            //numericUpDownFontSize.Value = 32;
         }
         
         void LoadFonts()
@@ -65,12 +67,23 @@ namespace Clock
             //Console.WriteLine("\nSelectedIndexChanged:\n");
             //Console.WriteLine($"Selected index:\t{(sender as ComboBox).SelectedIndex}");
             //Console.WriteLine($"Selected item: \t{(sender as ComboBox).SelectedItem}");
-           // Console.WriteLine($"Selected text: \t{(sender as ComboBox).SelectedText.ToString()}");
-           // Console.WriteLine($"Selected value:\t{(sender as ComboBox).SelectedValue.ToString()}");
-            Console.WriteLine("\n__________________________________\n");
+            // Console.WriteLine($"Selected text: \t{(sender as ComboBox).SelectedText.ToString()}");
+            // Console.WriteLine($"Selected value:\t{(sender as ComboBox).SelectedValue.ToString()}");
+            //Console.WriteLine("\n__________________________________\n");
+            ViewExampleFont();
+        }
+
+        void ViewExampleFont()
+        {
             PrivateFontCollection pfc = new PrivateFontCollection();
-            pfc.AddFontFile((sender as ComboBox).SelectedItem.ToString());
-            labelExample.Font = new Font(pfc.Families[0],32);
+            pfc.AddFontFile((comboBoxFont).SelectedItem.ToString());
+            labelExample.Font = new Font(pfc.Families[0], (int)numericUpDownFontSize.Value);
+
+        }
+
+        private void numericUpDownFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            ViewExampleFont();
         }
     }
 }
