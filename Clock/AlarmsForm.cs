@@ -13,26 +13,33 @@ namespace Clock
 {
     public partial class AlarmsForm : Form
     {
+        Form parent;
         public AlarmsForm()
         {
             InitializeComponent();
 
         }
-
-        private void Alarm_Load(object sender, EventArgs e)
+        public AlarmsForm(Form parent):this()
         {
-        
-
-            //public override string ToString()
-            //{
-            //    return $"{Time:HH:mm} | {(Enabled ? "Вкл" : "Выкл")} | {Path.GetFileName(SoundPath)}";
-            //}
+            this.parent = parent;
+            this.StartPosition = FormStartPosition.Manual;
         }
 
+        
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddAlarmForm addAlarm = new AddAlarmForm();
-            addAlarm.ShowDialog();
+            AddAlarmForm alarmDialog = new AddAlarmForm(this);
+           if(alarmDialog.ShowDialog() == DialogResult.OK)
+            {
+                lbAlarmList.Items.Add(alarmDialog.Alarm);
+            }
+
+        }
+
+        private void AlarmForm_Load(object sender, EventArgs e)
+        {
+            this.Location = new Point(parent.Location.X - 120, parent.Location.Y + 150);
+
         }
     }
 

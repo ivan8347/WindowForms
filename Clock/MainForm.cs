@@ -27,13 +27,13 @@ namespace Clock
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
             fontDialog = new ChooseFont();
-            alarms = new AlarmsForm();
 
 
 
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(screen.Right - this.Width, screen.Top);
-
+            alarms = new AlarmsForm(this);
+            tsmiTopmost.Checked = this.TopMost = true;
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -46,6 +46,8 @@ namespace Clock
                 labelTime.Text += $"\n{DateTime.Now.DayOfWeek}";
             if (checkBoxShowDate.Checked)
                 labelTime.Text += $"\n{DateTime.Now:dd.MM.yyyy}";
+            notifyIcon.Text = labelTime.Text;
+
         }
 
         void SetVisibility(bool visible)

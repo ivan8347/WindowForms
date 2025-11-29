@@ -28,50 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chUseDate = new System.Windows.Forms.CheckBox();
-            this.stpDate = new System.Windows.Forms.DateTimePicker();
+            this.cbUseDate = new System.Windows.Forms.CheckBox();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.clbWeekDays = new System.Windows.Forms.CheckedListBox();
+            this.btnFile = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.lblFile = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // chUseDate
+            // cbUseDate
             // 
-            this.chUseDate.AutoSize = true;
-            this.chUseDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chUseDate.Location = new System.Drawing.Point(12, 12);
-            this.chUseDate.Name = "chUseDate";
-            this.chUseDate.Size = new System.Drawing.Size(314, 36);
-            this.chUseDate.TabIndex = 0;
-            this.chUseDate.Text = "На конткретную дату";
-            this.chUseDate.UseVisualStyleBackColor = true;
+            this.cbUseDate.AutoSize = true;
+            this.cbUseDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbUseDate.Location = new System.Drawing.Point(12, 12);
+            this.cbUseDate.Name = "cbUseDate";
+            this.cbUseDate.Size = new System.Drawing.Size(314, 36);
+            this.cbUseDate.TabIndex = 0;
+            this.cbUseDate.Text = "На конткретную дату";
+            this.cbUseDate.UseVisualStyleBackColor = true;
+            this.cbUseDate.CheckedChanged += new System.EventHandler(this.chUseDate_CheckedChanged);
             // 
-            // stpDate
+            // dtpDate
             // 
-            this.stpDate.CustomFormat = "yyyy.MM.dd";
-            this.stpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.stpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.stpDate.Location = new System.Drawing.Point(12, 62);
-            this.stpDate.Name = "stpDate";
-            this.stpDate.Size = new System.Drawing.Size(196, 38);
-            this.stpDate.TabIndex = 1;
+            this.dtpDate.CustomFormat = "yyyy.MM.dd";
+            this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(12, 62);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(292, 38);
+            this.dtpDate.TabIndex = 1;
             // 
             // dtpTime
             // 
             this.dtpTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTime.Location = new System.Drawing.Point(230, 62);
+            this.dtpTime.Location = new System.Drawing.Point(359, 62);
             this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(196, 38);
+            this.dtpTime.ShowUpDown = true;
+            this.dtpTime.Size = new System.Drawing.Size(297, 38);
             this.dtpTime.TabIndex = 2;
             // 
-            // checkedListBox1
+            // clbWeekDays
             // 
-            this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.ColumnWidth = 70;
-            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.IntegralHeight = false;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.clbWeekDays.CheckOnClick = true;
+            this.clbWeekDays.ColumnWidth = 60;
+            this.clbWeekDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clbWeekDays.FormattingEnabled = true;
+            this.clbWeekDays.IntegralHeight = false;
+            this.clbWeekDays.Items.AddRange(new object[] {
             "пн",
             "вт",
             "ср",
@@ -79,23 +85,74 @@
             "пт",
             "сб",
             "вс"});
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 106);
-            this.checkedListBox1.MultiColumn = true;
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(680, 37);
-            this.checkedListBox1.TabIndex = 3;
+            this.clbWeekDays.Location = new System.Drawing.Point(12, 106);
+            this.clbWeekDays.MultiColumn = true;
+            this.clbWeekDays.Name = "clbWeekDays";
+            this.clbWeekDays.Size = new System.Drawing.Size(644, 53);
+            this.clbWeekDays.TabIndex = 3;
+            this.clbWeekDays.MouseUp += new System.Windows.Forms.MouseEventHandler(this.clbWeekDays_MouseUp);
+            // 
+            // btnFile
+            // 
+            this.btnFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnFile.Location = new System.Drawing.Point(15, 269);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Size = new System.Drawing.Size(121, 46);
+            this.btnFile.TabIndex = 4;
+            this.btnFile.Text = "Обзор";
+            this.btnFile.UseVisualStyleBackColor = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCancel.Location = new System.Drawing.Point(451, 269);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(156, 46);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnOk
+            // 
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOk.Location = new System.Drawing.Point(263, 269);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(156, 46);
+            this.btnOk.TabIndex = 6;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // lblFile
+            // 
+            this.lblFile.AutoSize = true;
+            this.lblFile.Location = new System.Drawing.Point(12, 193);
+            this.lblFile.Name = "lblFile";
+            this.lblFile.Size = new System.Drawing.Size(37, 16);
+            this.lblFile.TabIndex = 7;
+            this.lblFile.Text = "Fiale";
             // 
             // AddAlarmForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 327);
-            this.Controls.Add(this.checkedListBox1);
+            this.ClientSize = new System.Drawing.Size(773, 327);
+            this.Controls.Add(this.lblFile);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnFile);
+            this.Controls.Add(this.clbWeekDays);
             this.Controls.Add(this.dtpTime);
-            this.Controls.Add(this.stpDate);
-            this.Controls.Add(this.chUseDate);
+            this.Controls.Add(this.dtpDate);
+            this.Controls.Add(this.cbUseDate);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddAlarmForm";
+            this.ShowInTaskbar = false;
             this.Text = "AddAlarmForm";
+            this.Load += new System.EventHandler(this.AddAlarmForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,9 +160,13 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox chUseDate;
-        private System.Windows.Forms.DateTimePicker stpDate;
+        private System.Windows.Forms.CheckBox cbUseDate;
+        private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.DateTimePicker dtpTime;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox clbWeekDays;
+        private System.Windows.Forms.Button btnFile;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Label lblFile;
     }
 }
