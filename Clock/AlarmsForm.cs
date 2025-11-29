@@ -29,7 +29,11 @@ namespace Clock
             //}
         }
 
-
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddAlarmForm addAlarm = new AddAlarmForm();
+            addAlarm.ShowDialog();
+        }
     }
 
 }
