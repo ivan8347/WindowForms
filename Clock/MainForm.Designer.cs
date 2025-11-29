@@ -56,6 +56,8 @@
             this.checkBoxShowWeekDay = new System.Windows.Forms.CheckBox();
             this.buttonHideControls = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tsmiAlarms = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,12 +91,14 @@
             this.toolStripSeparator4,
             this.tsmiChooseFont,
             this.tsmiColors,
+            this.toolStripSeparator5,
+            this.tsmiAlarms,
             this.toolStripSeparator7,
             this.tsmiAutostart,
-            this.toolStripSeparator5,
+            this.toolStripSeparator3,
             this.tsmiQuit});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(300, 382);
+            this.contextMenuStrip.Size = new System.Drawing.Size(300, 420);
             // 
             // timeFormatToolStripMenuItem
             // 
@@ -274,6 +278,17 @@
             this.notifyIcon.Visible = true;
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
             // 
+            // tsmiAlarms
+            // 
+            this.tsmiAlarms.Name = "tsmiAlarms";
+            this.tsmiAlarms.Size = new System.Drawing.Size(299, 32);
+            this.tsmiAlarms.Text = "Alarms";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(296, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -324,6 +339,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAutostart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsmiShowConsole;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAlarms;
     }
 }
 

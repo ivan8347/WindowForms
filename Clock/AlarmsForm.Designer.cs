@@ -1,6 +1,6 @@
 ﻿namespace Clock
 {
-    partial class Alarm
+    partial class AlarmsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.button = new System.Windows.Forms.Button();
-            this.buttonAlarm = new System.Windows.Forms.Button();
-            this.listBoxAlarm = new System.Windows.Forms.ListBox();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnAlarm = new System.Windows.Forms.Button();
+            this.lbAlarmBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // dateTimePicker
@@ -46,46 +46,46 @@
             this.dateTimePicker.Size = new System.Drawing.Size(200, 38);
             this.dateTimePicker.TabIndex = 0;
             // 
-            // button
+            // btnDelete
             // 
-            this.button.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button.Location = new System.Drawing.Point(8, 364);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(204, 60);
-            this.button.TabIndex = 1;
-            this.button.Text = "выбрать звук";
-            this.button.UseVisualStyleBackColor = true;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDelete.Location = new System.Drawing.Point(8, 364);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(204, 60);
+            this.btnDelete.TabIndex = 1;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
-            // buttonAlarm
+            // btnAlarm
             // 
-            this.buttonAlarm.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAlarm.Location = new System.Drawing.Point(288, 364);
-            this.buttonAlarm.Name = "buttonAlarm";
-            this.buttonAlarm.Size = new System.Drawing.Size(206, 59);
-            this.buttonAlarm.TabIndex = 2;
-            this.buttonAlarm.Text = "добавить";
-            this.buttonAlarm.UseVisualStyleBackColor = true;
+            this.btnAlarm.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnAlarm.Location = new System.Drawing.Point(288, 364);
+            this.btnAlarm.Name = "btnAlarm";
+            this.btnAlarm.Size = new System.Drawing.Size(206, 59);
+            this.btnAlarm.TabIndex = 2;
+            this.btnAlarm.Text = "добавить";
+            this.btnAlarm.UseVisualStyleBackColor = true;
             // 
-            // listBoxAlarm
+            // lbAlarmBox
             // 
-            this.listBoxAlarm.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBoxAlarm.FormattingEnabled = true;
-            this.listBoxAlarm.ItemHeight = 31;
-            this.listBoxAlarm.Location = new System.Drawing.Point(8, -1);
-            this.listBoxAlarm.Name = "listBoxAlarm";
-            this.listBoxAlarm.Size = new System.Drawing.Size(486, 66);
-            this.listBoxAlarm.TabIndex = 3;
+            this.lbAlarmBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbAlarmBox.FormattingEnabled = true;
+            this.lbAlarmBox.ItemHeight = 31;
+            this.lbAlarmBox.Location = new System.Drawing.Point(8, -1);
+            this.lbAlarmBox.Name = "lbAlarmBox";
+            this.lbAlarmBox.Size = new System.Drawing.Size(486, 66);
+            this.lbAlarmBox.TabIndex = 3;
             // 
-            // Alarm
+            // AlarmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.listBoxAlarm);
-            this.Controls.Add(this.buttonAlarm);
-            this.Controls.Add(this.button);
+            this.Controls.Add(this.lbAlarmBox);
+            this.Controls.Add(this.btnAlarm);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dateTimePicker);
-            this.Name = "Alarm";
+            this.Name = "AlarmsForm";
             this.Text = "Alarm";
             this.Load += new System.EventHandler(this.Alarm_Load);
             this.ResumeLayout(false);
@@ -95,8 +95,8 @@
         #endregion
 
         private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Button button;
-        private System.Windows.Forms.Button buttonAlarm;
-        private System.Windows.Forms.ListBox listBoxAlarm;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAlarm;
+        private System.Windows.Forms.ListBox lbAlarmBox;
     }
 }

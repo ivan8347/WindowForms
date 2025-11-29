@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Clock
 {
-    public partial class Alarm : Form
+    public partial class AlarmsForm : Form
     {
-        public Alarm()
+        public AlarmsForm()
         {
             InitializeComponent();
 
