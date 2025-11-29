@@ -18,6 +18,10 @@ namespace Clock
         ColorDialog backgrountDialog;
         ColorDialog foregroundDialog;
         ChooseFont fontDialog;
+        AlarmDialog alarmDialog;
+        public string AlarmFile {  get; set; }
+        public DateTime AlarmTime { get; set; }
+       // public System.Windows.Forms.NotifyIcon NotifyIcon { get => notifyIconSystemTray; }
         public MainForm()
         {
             InitializeComponent();
@@ -26,6 +30,9 @@ namespace Clock
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
             fontDialog = new ChooseFont();
+             alarmDialog = new AlarmDialog(this);
+
+           // DateTime alarmTime;
 
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(screen.Right - this.Width, screen.Top);
@@ -37,6 +44,14 @@ namespace Clock
             //    labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
             //else
                 labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime currentTime = new DateTime(DateTime.Now.Ticks - DateTime.Now.Ticks % TimeSpan.TicksPerSecond);
+            if (AlarmTime.Equals(currentTime))
+            {
+               // MessageBox.Show("Пора вставать");
+                axWindowsMediaPlayer.URL = AlarmFile;
+                axWindowsMediaPlayer.Ctlcontrols.play();
+            }
 
             if (checkBoxShowWeekDay.Checked)
                 labelTime.Text += $"\n{DateTime.Now.DayOfWeek}";
@@ -51,6 +66,7 @@ namespace Clock
             buttonHideControls.Visible = visible;
             this.FormBorderStyle = visible ? FormBorderStyle.FixedToolWindow : FormBorderStyle.None;
             this.TransparencyKey = visible ? Color.Empty : this.BackColor;
+            axWindowsMediaPlayer.Visible = visible;
            // this.ShowInTaskbar = visible;
         }
         private void buttonHideControls_Click(object sender, EventArgs e)
@@ -110,5 +126,9 @@ namespace Clock
             bool console = (sender as ToolStripMenuItem).Checked ? AllocConsole() : FreeConsole();
         }
 
+        private void tsmiAlarm_Click(object sender, EventArgs e)
+        {
+            alarmDialog.ShowDialog();
+        }
     }
 }
