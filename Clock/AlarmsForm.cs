@@ -36,10 +36,15 @@ namespace Clock
 
         }
 
-        private void AlarmForm_Load(object sender, EventArgs e)
+        private void AlarmsForm_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(parent.Location.X - 120, parent.Location.Y + 150);
+            this.Location = new Point(parent.Location.X - 200, parent.Location.Y + 150);
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+                lbAlarmList.Items.Remove(lbAlarmList.SelectedItem);
         }
     }
 

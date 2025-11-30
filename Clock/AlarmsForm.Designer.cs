@@ -42,6 +42,7 @@
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -77,8 +78,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Alarm";
-            this.MaximumSizeChanged += new System.EventHandler(this.AlarmForm_Load);
-            this.Load += new System.EventHandler(this.AlarmForm_Load);
+            this.MaximumSizeChanged += new System.EventHandler(this.AlarmsForm_Load);
+            this.Load += new System.EventHandler(this.AlarmsForm_Load);
             this.ResumeLayout(false);
 
         }
