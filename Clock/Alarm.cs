@@ -20,6 +20,14 @@ namespace Clock
                 Weekdays |= (byte) (1<< days[i]);
             }
         }
+       /* public Alarm(Alarm other)
+        {
+            this.Date = other.Date;
+            this.Time = other.Time;
+            this.Weekdays = other.Weekdays;
+            this.Filename = other.Filename;
+
+        }*/
         public override string ToString()
         {
             return $"{Date.ToString("dd.MM.yyyy")}  {Time.ToString("hh:mm:ss tt")}  {Weekdays}  {Filename.Split('\\').Last()}";

@@ -19,6 +19,7 @@ namespace Clock
         ColorDialog foregroundDialog;
         ChooseFont fontDialog;
         AlarmsForm alarms;
+
         public MainForm()
         {
             InitializeComponent();
