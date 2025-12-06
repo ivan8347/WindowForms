@@ -87,6 +87,6 @@
         #endregion
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ListBox lbAlarmList;
+        public System.Windows.Forms.ListBox lbAlarmList;
     }
 }

@@ -13,6 +13,8 @@ namespace Clock
 {
     public partial class AlarmsForm : Form
     {
+       
+
         Form parent;
         public AlarmsForm()
         {
@@ -24,8 +26,6 @@ namespace Clock
             this.parent = parent;
             this.StartPosition = FormStartPosition.Manual;
         }
-
-        
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddAlarmForm alarmDialog = new AddAlarmForm(this);

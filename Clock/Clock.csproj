@@ -60,6 +60,12 @@
     <Compile Include="AlarmsForm.Designer.cs">
       <DependentUpon>AlarmsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AlarmTriggerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlarmTriggerForm.Designer.cs">
+      <DependentUpon>AlarmTriggerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChooseFont.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <EmbeddedResource Include="AlarmsForm.resx">
       <DependentUpon>AlarmsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AlarmTriggerForm.resx">
+      <DependentUpon>AlarmTriggerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChooseFont.resx">
       <DependentUpon>ChooseFont.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,18 +97,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -108,6 +117,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bunny.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

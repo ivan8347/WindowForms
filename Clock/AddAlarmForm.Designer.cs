@@ -52,29 +52,29 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.CustomFormat = "yyyy.MM.dd";
+            this.dtpDate.CustomFormat = "dd.MM.yyyy";
             this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(12, 62);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(292, 38);
+            this.dtpDate.Size = new System.Drawing.Size(179, 38);
             this.dtpDate.TabIndex = 1;
             // 
             // dtpTime
             // 
             this.dtpTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpTime.Location = new System.Drawing.Point(359, 62);
+            this.dtpTime.Location = new System.Drawing.Point(288, 54);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.ShowUpDown = true;
-            this.dtpTime.Size = new System.Drawing.Size(297, 38);
+            this.dtpTime.Size = new System.Drawing.Size(189, 38);
             this.dtpTime.TabIndex = 2;
             // 
             // clbWeekDays
             // 
             this.clbWeekDays.CheckOnClick = true;
-            this.clbWeekDays.ColumnWidth = 60;
-            this.clbWeekDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clbWeekDays.ColumnWidth = 48;
+            this.clbWeekDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clbWeekDays.FormattingEnabled = true;
             this.clbWeekDays.IntegralHeight = false;
             this.clbWeekDays.Items.AddRange(new object[] {
@@ -88,13 +88,13 @@
             this.clbWeekDays.Location = new System.Drawing.Point(12, 106);
             this.clbWeekDays.MultiColumn = true;
             this.clbWeekDays.Name = "clbWeekDays";
-            this.clbWeekDays.Size = new System.Drawing.Size(644, 53);
+            this.clbWeekDays.Size = new System.Drawing.Size(465, 41);
             this.clbWeekDays.TabIndex = 3;
             this.clbWeekDays.MouseUp += new System.Windows.Forms.MouseEventHandler(this.clbWeekDays_MouseUp);
             // 
             // btnFile
             // 
-            this.btnFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnFile.Location = new System.Drawing.Point(15, 269);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(121, 46);
@@ -106,21 +106,22 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCancel.Location = new System.Drawing.Point(451, 269);
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCancel.Location = new System.Drawing.Point(360, 269);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(156, 46);
+            this.btnCancel.Size = new System.Drawing.Size(117, 46);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOk.Location = new System.Drawing.Point(263, 269);
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOk.Location = new System.Drawing.Point(218, 269);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(156, 46);
+            this.btnOk.Size = new System.Drawing.Size(126, 46);
             this.btnOk.TabIndex = 6;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -131,15 +132,15 @@
             this.lblFile.AutoSize = true;
             this.lblFile.Location = new System.Drawing.Point(12, 193);
             this.lblFile.Name = "lblFile";
-            this.lblFile.Size = new System.Drawing.Size(37, 16);
+            this.lblFile.Size = new System.Drawing.Size(71, 16);
             this.lblFile.TabIndex = 7;
-            this.lblFile.Text = "Fiale";
+            this.lblFile.Text = "Fialename";
             // 
             // AddAlarmForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 327);
+            this.ClientSize = new System.Drawing.Size(582, 332);
             this.Controls.Add(this.lblFile);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);

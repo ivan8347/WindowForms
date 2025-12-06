@@ -37,29 +37,22 @@ namespace Clock
             dtpDate.Enabled = cbUseDate.Checked;
             clbWeekDays.Enabled = !cbUseDate.Checked;
         }
-
-
-
         private void btnFile_Click(object sender, EventArgs e)
         {
             fileDialog.ShowDialog();
             lblFile.Text = fileDialog.FileName;
         }
-
-
-       
-
         private void AddAlarmForm_Load(object sender, EventArgs e)
         {
             this.Location = new Point(parent.Location.X + 15, parent.Location.Y + 20);
             this.TopMost = true;
-            this.TopMost = false;
+           // this.TopMost = false;
         }
 
         private void clbWeekDays_MouseUp(object sender, MouseEventArgs e)
         {
             string weekdays = "";
-            string indexes = "";
+           //string indexes = "";
             for (int i = 0; i < (sender as CheckedListBox).CheckedItems.Count; i++)
             {
                 weekdays += (sender as CheckedListBox).CheckedItems[i] + "\t";
@@ -86,6 +79,12 @@ namespace Clock
             Alarm.WeekdaysFromArray (WeekdaysToArray());
            
             // Alarm.Weekdays = clbWeekDays.CheckedIndices;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }
