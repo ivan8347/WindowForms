@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 //}
 namespace Clock
 {
-    public class Alarm
+    public class Alarm:IComparable
     {
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
@@ -52,6 +52,11 @@ namespace Clock
                 if (d >= 0 && d <= 6)
                     Weekdays |= (byte)(1 << d);
             }
+        }
+
+        public int CompareTo(object other)
+        {
+            return this.Date.CompareTo((other as Alarm).Date) + this.Time.CompareTo((other as Alarm).Time);
         }
         public override string ToString()
         {

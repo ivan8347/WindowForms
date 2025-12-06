@@ -30,8 +30,8 @@ namespace Clock
         {
             InitializeComponent();
 
-
             SetVisibility(false);
+            LoadSettings();
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
             fontDialog = new ChooseFont();
