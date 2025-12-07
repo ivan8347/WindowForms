@@ -20,14 +20,17 @@ namespace Clock
     public partial class ChooseFont : Form
     {
         new public Font Font { get; set; }
+             public Font SelectedFont { get; private set; }
         public ChooseFont()
         {
-            InitializeComponent();
-           LoadFonts();
-            comboBoxFont.SelectedIndex = 0;
-            //numericUpDownFontSize.Value = 32;
-        }
         
+        
+            InitializeComponent();
+            LoadFonts();
+            comboBoxFont.SelectedIndex = 0;
+            numericUpDownFontSize.Value = 32;
+        }
+
         void LoadFonts()
         {
             Console.WriteLine(Application.ExecutablePath);
@@ -38,16 +41,16 @@ namespace Clock
             Console.WriteLine(Directory.GetCurrentDirectory());
 
             //////////////////////////////////////////////////
-           
-            comboBoxFont.Items.AddRange(GetFilesByExt(Directory.GetCurrentDirectory(),"*.ttf"));
-            comboBoxFont.Items.AddRange(GetFilesByExt(Directory.GetCurrentDirectory(),"*.otf"));
-            string[] GetFilesByExt (string derectory,string format)
-            { 
-                string[] files = Directory.GetFiles(derectory,format);
-            for (int i = 0; i < files.Length; i++) 
+
+            comboBoxFont.Items.AddRange(GetFilesByExt(Directory.GetCurrentDirectory(), "*.ttf"));
+            comboBoxFont.Items.AddRange(GetFilesByExt(Directory.GetCurrentDirectory(), "*.otf"));
+            string[] GetFilesByExt(string derectory, string format)
             {
-                files[i] = files[i].Split('\\').Last();
-            }
+                string[] files = Directory.GetFiles(derectory, format);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    files[i] = files[i].Split('\\').Last();
+                }
                 return files;
             }
         }
@@ -59,7 +62,7 @@ namespace Clock
 
         private void ChooseFont_Load(object sender, EventArgs e)
         {
-           // LoadFonts();
+            // LoadFonts();
         }
 
         private void comboBoxFont_SelectedIndexChanged(object sender, EventArgs e)

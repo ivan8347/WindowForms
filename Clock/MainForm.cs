@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Xml.Linq;
+using System.Drawing.Text;
 
 namespace Clock
 {
@@ -30,8 +31,11 @@ namespace Clock
         {
             InitializeComponent();
 
-            SetVisibility(false);
-            LoadSettings();
+           // bool savedFormat = Properties.Settings.Default.Is24HourFormat;                      // Формат времени
+            //tsmiHour_24.Checked = !savedFormat;
+            //tsmiHour_12.Checked = savedFormat;
+           // LoadSettings();
+           // SetVisibility(true);
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
             fontDialog = new ChooseFont();
@@ -44,9 +48,9 @@ namespace Clock
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(screen.Right - this.Width, screen.Top);
             alarms = new AlarmsForm(this);
-           // tsmiTopmost.Checked = this.TopMost = true;
+             tsmiTopmost.Checked = this.TopMost = true;
         }
-       
+
         Alarm FindNextAlarm()
         {
             nextAlarm = alarms.lbAlarmList.Items.Cast<Alarm>().ToArray().Min();
@@ -58,7 +62,10 @@ namespace Clock
             //if (Hour24)
             //    labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
             //else
-            labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
+            if (tsmiHour_12.Checked)
+            { labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture); } // 12 часов
+            if (tsmiHour_24.Checked) { labelTime.Text = DateTime.Now.ToString("HH:mm:ss "); } //24 часа
+           // labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
             if (nextAlarm != null && !nextAlarm.Triggered && nextAlarm.Time > DateTime.Now)
             {
                 TimeSpan remaining = nextAlarm.Time - DateTime.Now;
@@ -102,7 +109,6 @@ namespace Clock
                         else
                         {
                             player.controls.stop();
-                            //lblStatus.Text += "\nСтоп";
                             lblStatus.Visible = false;
                             MessageBox.Show($"Стоп!!!!!");
                             nextAlarm.Triggered = false;
@@ -112,45 +118,42 @@ namespace Clock
             }
 
         }
-        /*axWindowsMediaPlayer.Visible = true;
-        axWindowsMediaPlayer.URL = nextAlarm.Filename;
-        axWindowsMediaPlayer.settings.volume = 100;
-        axWindowsMediaPlayer.Ctlcontrols.play();*/
-
+       /* void SaveSettings()
+        {
+            string settingsPath = Path.Combine(Application.StartupPath, "Settings.ini");
+            using (StreamWriter sw = new StreamWriter(settingsPath))
+            {
+                sw.WriteLine(tsmiTopmost.Checked);
+                sw.WriteLine(tsmiShowControls.Checked);
+                sw.WriteLine(tsmiShowDate.Checked);
+                sw.WriteLine(tsmiShowWeekDay.Checked);
+                sw.WriteLine(tsmiShowConsole.Checked);
+                sw.WriteLine(labelTime.BackColor.ToArgb());
+                sw.WriteLine(labelTime.ForeColor.ToArgb());
+               // sw.WriteLine(labelTime.Font.Name);
+               // sw.WriteLine(labelTime.Font.Size);
+            }
+        }
 
         void LoadSettings()
         {
-            StreamReader sr = new StreamReader
-                ($"{Path.GetDirectoryName(Application.ExecutablePath)}\\..\\..\\Settings.ini");
+            string settingsPath = Path.Combine(Application.StartupPath, "Settings.ini");
+            if (!File.Exists(settingsPath)) return;
 
-            tsmiTopmost.Checked = Boolean.Parse(sr.ReadLine());
-            tsmiShowDate.Checked = Boolean.Parse(sr.ReadLine());
-            tsmiShowWeekDay.Checked = Boolean.Parse(sr.ReadLine());
-            tsmiShowControls.Checked = Boolean.Parse(sr.ReadLine());
-            string fontName = sr.ReadLine();
-            int fontSize = Convert.ToInt32(sr.ReadLine());
-            labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
-            labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
-
-
-            sr.Close();
-        }
-        void SaveSettings()
-        {
-            StreamWriter sv = new StreamWriter
-                ($"{Path.GetDirectoryName(Application.ExecutablePath)}\\..\\..\\Settings.ini");
-            sv.WriteLine($"{tsmiTopmost.Checked}");
-            sv.WriteLine($"{tsmiShowDate.Checked}");
-            sv.WriteLine($"{tsmiShowWeekDay.Checked}");
-            sv.WriteLine($"{tsmiShowControls.Checked}");
-            sv.WriteLine($"{labelTime.Font.Name}");
-            sv.WriteLine($"{labelTime.Font.Size}");
-            sv.WriteLine($"{labelTime.BackColor.ToArgb()}");
-            sv.WriteLine($"{labelTime.ForeColor.ToArgb()}");
+            using (StreamReader sr = new StreamReader(settingsPath))
+            {
+                tsmiTopmost.Checked = bool.Parse(sr.ReadLine());
+                tsmiShowControls.Checked = bool.Parse(sr.ReadLine());
+                tsmiShowDate.Checked = bool.Parse(sr.ReadLine());
+                tsmiShowWeekDay.Checked = bool.Parse(sr.ReadLine());
+                tsmiShowConsole.Checked = bool.Parse(sr.ReadLine());
+                labelTime.BackColor = Color.FromArgb(int.Parse(sr.ReadLine()));
+                labelTime.ForeColor = Color.FromArgb(int.Parse(sr.ReadLine()));
+               
+            }
+        }*/
 
 
-            sv.Close();
-        }
 
         void SetVisibility(bool visible)
         {
@@ -161,7 +164,7 @@ namespace Clock
             this.TransparencyKey = visible ? Color.Empty : this.BackColor;
             // this.ShowInTaskbar = visible;
         }
-       
+
         private void buttonHideControls_Click(object sender, EventArgs e)
         {
             SetVisibility(tsmiShowControls.Checked = false);
@@ -176,8 +179,11 @@ namespace Clock
             this.TopMost = true;
             this.TopMost = false;
         }
-        private void tsmiQuit_Click(object sender, EventArgs e) => this.Close();
-
+        private void tsmiQuit_Click(object sender, EventArgs e)
+        {
+           // SaveSettings();
+            this.Close();
+        }
         private void tsmiTopmost_Click(object sender, EventArgs e) =>
             this.TopMost = tsmiTopmost.Checked;
         private void tsmiShowDate_Click(object sender, EventArgs e) =>
@@ -206,39 +212,22 @@ namespace Clock
         private void tsmiChooseFont_Click(object sender, EventArgs e)
         {
             if (fontDialog.ShowDialog() == DialogResult.OK)
+                labelTime.Font = fontDialog.SelectedFont;
 
-                labelTime.Font = fontDialog.Font;
+
+           /* if (fontDialog.ShowDialog() == DialogResult.OK)
+
+                labelTime.Font = fontDialog.Font;*/
         }
-        //[DllImport("kernel32.dll")]
-        //public static extern bool AllocConsole();
-        //[DllImport("kernel32.dll")]
-        //public static extern bool FreeConsole();
+        [DllImport("kernel32.dll")]
+        public static extern bool AllocConsole();
+        [DllImport("kernel32.dll")]
+        public static extern bool FreeConsole();
 
         private void tsmiShowConsole_CheckedChanged(object sender, EventArgs e)
         {
-           /* var menuItem = sender as ToolStripMenuItem;
-            if (menuItem.Checked)
-            {
-                AllocConsole();
-                StreamWriter writer = new StreamWriter(Console.OpenStandardOutput());
-                writer.AutoFlush = true;
-                Console.SetOut(writer);
-                // Console.WriteLine("Консоль подключена. Привет из Clock!");
-            }
-            else
-            {
-                FreeConsole();
-            }
+            bool show = tsmiShowConsole.Checked ? AllocConsole() : FreeConsole();
         }
-
-        //AllocConsole();*/
-        bool show = tsmiShowConsole.Checked ? AllocConsole() : FreeConsole();
-        }
-        [DllImport("kernel32.dll")]
-        static extern bool AllocConsole();
-        [DllImport("kernel32.dll")]
-        static extern bool FreeConsole();
-
         private void tsmiAlarms_Click(object sender, EventArgs e)
         {
             alarms.ShowDialog();
@@ -253,6 +242,22 @@ namespace Clock
             key.Dispose();
         }
 
-        
+       
+
+        private void tsmiHour_12_Click_1(object sender, EventArgs e)
+        {
+            tsmiHour_12.Checked = true;
+            tsmiHour_24.Checked = false;
+           // Properties.Settings.Default.Is24HourFormat = tsmiHour_12.Checked;
+            Properties.Settings.Default.Save();
+        }
+        private void tsmiHour_24_Click(object sender, EventArgs e)
+        {
+            tsmiHour_24.Checked = true;
+            tsmiHour_12.Checked = false;
+           // Properties.Settings.Default.Is24HourFormat = tsmiHour_24.Checked;
+            Properties.Settings.Default.Save();
+        }
+
     }
 }

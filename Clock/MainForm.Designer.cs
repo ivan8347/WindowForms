@@ -33,8 +33,8 @@
             this.labelTime = new System.Windows.Forms.Label();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.timeFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_24 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHour_12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHour_24 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTopmost = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -104,23 +104,26 @@
             // timeFormatToolStripMenuItem
             // 
             this.timeFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_12,
-            this.tsmi_24});
+            this.tsmiHour_12,
+            this.tsmiHour_24});
             this.timeFormatToolStripMenuItem.Name = "timeFormatToolStripMenuItem";
             this.timeFormatToolStripMenuItem.Size = new System.Drawing.Size(299, 32);
             this.timeFormatToolStripMenuItem.Text = "Time format";
             // 
-            // tsmi_12
+            // tsmiHour_12
             // 
-            this.tsmi_12.Name = "tsmi_12";
-            this.tsmi_12.Size = new System.Drawing.Size(179, 32);
-            this.tsmi_12.Text = "12 - hour";
+            this.tsmiHour_12.CheckOnClick = true;
+            this.tsmiHour_12.Name = "tsmiHour_12";
+            this.tsmiHour_12.Size = new System.Drawing.Size(224, 32);
+            this.tsmiHour_12.Text = "12 - hour";
+            this.tsmiHour_12.Click += new System.EventHandler(this.tsmiHour_12_Click_1);
             // 
-            // tsmi_24
+            // tsmiHour_24
             // 
-            this.tsmi_24.Name = "tsmi_24";
-            this.tsmi_24.Size = new System.Drawing.Size(179, 32);
-            this.tsmi_24.Text = "24 - hour";
+            this.tsmiHour_24.Name = "tsmiHour_24";
+            this.tsmiHour_24.Size = new System.Drawing.Size(224, 32);
+            this.tsmiHour_24.Text = "24 - hour";
+            this.tsmiHour_24.Click += new System.EventHandler(this.tsmiHour_24_Click);
             // 
             // toolStripSeparator1
             // 
@@ -347,8 +350,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiQuit;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem timeFormatToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_12;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_24;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHour_12;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHour_24;
         private System.Windows.Forms.ToolStripMenuItem tsmiChooseFont;
         private System.Windows.Forms.ToolStripMenuItem tsmiColors;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
