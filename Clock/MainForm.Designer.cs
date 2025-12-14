@@ -99,7 +99,7 @@
             this.toolStripSeparator3,
             this.tsmiQuit});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(300, 420);
+            this.contextMenuStrip.Size = new System.Drawing.Size(300, 392);
             // 
             // timeFormatToolStripMenuItem
             // 
@@ -113,14 +113,14 @@
             // tsmiHour_12
             // 
             this.tsmiHour_12.Name = "tsmiHour_12";
-            this.tsmiHour_12.Size = new System.Drawing.Size(224, 32);
+            this.tsmiHour_12.Size = new System.Drawing.Size(179, 32);
             this.tsmiHour_12.Text = "12 - hour";
             this.tsmiHour_12.Click += new System.EventHandler(this.tsmiHour_12_Click);
             // 
             // tsmiHour_24
             // 
             this.tsmiHour_24.Name = "tsmiHour_24";
-            this.tsmiHour_24.Size = new System.Drawing.Size(224, 32);
+            this.tsmiHour_24.Size = new System.Drawing.Size(179, 32);
             this.tsmiHour_24.Text = "24 - hour";
             this.tsmiHour_24.Click += new System.EventHandler(this.tsmiHour_24_Click);
             // 
@@ -325,6 +325,8 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Clock_SPU_411";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -33,6 +33,7 @@
             this.labelExample = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.btnApple = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +52,16 @@
             // 
             this.numericUpDownFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numericUpDownFontSize.Location = new System.Drawing.Point(597, 13);
+            this.numericUpDownFontSize.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDownFontSize.Minimum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
             this.numericUpDownFontSize.Name = "numericUpDownFontSize";
             this.numericUpDownFontSize.Size = new System.Drawing.Size(120, 38);
             this.numericUpDownFontSize.TabIndex = 1;
@@ -95,11 +106,24 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // btnApple
+            // 
+            this.btnApple.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnApple.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnApple.Location = new System.Drawing.Point(299, 294);
+            this.btnApple.Name = "btnApple";
+            this.btnApple.Size = new System.Drawing.Size(136, 37);
+            this.btnApple.TabIndex = 5;
+            this.btnApple.Text = "Apple";
+            this.btnApple.UseVisualStyleBackColor = true;
+            this.btnApple.Click += new System.EventHandler(this.btnApple_Click);
+            // 
             // ChooseFont
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 343);
+            this.Controls.Add(this.btnApple);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.labelExample);
@@ -107,7 +131,6 @@
             this.Controls.Add(this.comboBoxFont);
             this.Name = "ChooseFont";
             this.Text = "ChooseFont";
-            this.Load += new System.EventHandler(this.ChooseFont_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -121,5 +144,6 @@
         private System.Windows.Forms.Label labelExample;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button btnApple;
     }
 }

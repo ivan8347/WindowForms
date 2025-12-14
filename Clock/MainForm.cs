@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace Clock
 {
@@ -21,7 +22,8 @@ namespace Clock
     {
         ColorDialog backgrountDialog;
         ColorDialog foregroundDialog;
-        ChooseFont fontDialog;
+        ChooseFont fontDialog = null;
+        // ChooseFont fontDialog;
         AlarmsForm alarms;
         Alarm nextAlarm;
         private WMPLib.WindowsMediaPlayer player;
@@ -32,12 +34,11 @@ namespace Clock
 
             SetVisibility(false);
             LoadSettings();
-            // SaveSettings();
+            tsmiShowConsole.Checked = true;
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
-            fontDialog = new ChooseFont();
+            // fontDialog = new ChooseFont();
             Console.WriteLine(Directory.GetCurrentDirectory());
-            // tsmiShowConsole.Checked = true;
             // axWindowsMediaPlayer.Visible = false;
             player = new WMPLib.WindowsMediaPlayer();
             player.settings.volume = 60;
@@ -53,6 +54,63 @@ namespace Clock
             nextAlarm = alarms.lbAlarmList.Items.Cast<Alarm>().ToArray().Min();
             return nextAlarm;
         }
+
+        /*axWindowsMediaPlayer.Visible = true;
+        axWindowsMediaPlayer.URL = nextAlarm.Filename;
+        axWindowsMediaPlayer.settings.volume = 100;
+        axWindowsMediaPlayer.Ctlcontrols.play();*/
+        void SetVisibility(bool visible)
+        {
+            checkBoxShowDate.Visible = visible;
+            checkBoxShowWeekDay.Visible = visible;
+            buttonHideControls.Visible = visible;
+            this.FormBorderStyle = visible ? FormBorderStyle.FixedToolWindow : FormBorderStyle.None;
+            this.TransparencyKey = visible ? Color.Empty : this.BackColor;
+            // this.ShowInTaskbar = visible;
+        }
+
+
+        void SaveSettings()
+        {
+            StreamWriter sw = new StreamWriter("Settings.ini");
+           sw.WriteLine(tsmiHour_24.Checked ? "24" : "12");
+            sw.WriteLine($"{tsmiTopmost.Checked}");
+            sw.WriteLine($"{tsmiShowControls.Checked}");
+            sw.WriteLine($"{tsmiShowDate.Checked}");
+            sw.WriteLine($"{tsmiShowWeekDay.Checked}");
+            sw.WriteLine($"{tsmiShowConsole.Checked}");
+            sw.WriteLine($"{tsmiAutostart.Checked}");
+            sw.WriteLine($"{labelTime.BackColor.ToArgb()}");
+            sw.WriteLine($"{labelTime.ForeColor.ToArgb()}");
+            sw.WriteLine($"{fontDialog.Filename}");
+            sw.WriteLine($"{labelTime.Font.Size}");
+            sw.Close();
+            Process.Start("notepad", "Settings.ini");
+        }
+
+        void LoadSettings()
+        {
+            Directory.SetCurrentDirectory("..\\..\\Fonts");
+            StreamReader sr = new StreamReader("Settings.ini");
+            string hourFormat = sr.ReadLine();
+            tsmiHour_24.Checked = hourFormat == "24";
+            tsmiHour_12.Checked = hourFormat != "24";
+            tsmiTopmost.Checked = bool.Parse(sr.ReadLine());
+            tsmiShowControls.Checked = bool.Parse(sr.ReadLine());
+            tsmiShowDate.Checked = bool.Parse(sr.ReadLine());
+            tsmiShowWeekDay.Checked = bool.Parse(sr.ReadLine());
+            tsmiShowConsole.Checked = bool.Parse(sr.ReadLine());
+            tsmiAutostart.Checked = bool.Parse(sr.ReadLine());
+            labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+            labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+            string font_name = sr.ReadLine();
+            int font_size = (int)Convert.ToDouble(sr.ReadLine());
+
+            sr.Close();
+            fontDialog = new ChooseFont(font_name, font_size);
+            labelTime.Font = fontDialog.Font;
+        }
+
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -116,81 +174,6 @@ namespace Clock
             }
 
         }
-        /*axWindowsMediaPlayer.Visible = true;
-        axWindowsMediaPlayer.URL = nextAlarm.Filename;
-        axWindowsMediaPlayer.settings.volume = 100;
-        axWindowsMediaPlayer.Ctlcontrols.play();*/
-
-
-        void SaveSettings()
-        {
-            string settingsPath = Path.Combine(Application.StartupPath, "Settings.ini");
-            using (StreamWriter sv = new StreamWriter(settingsPath))
-            {
-                sv.WriteLine(tsmiTopmost.Checked);
-                sv.WriteLine(tsmiShowDate.Checked);
-                sv.WriteLine(tsmiShowWeekDay.Checked);
-                sv.WriteLine(tsmiShowControls.Checked);
-                sv.WriteLine(tsmiHour_24.Checked ? "24" : "12");
-                sv.WriteLine(labelTime.BackColor.ToArgb());
-                sv.WriteLine(labelTime.ForeColor.ToArgb());
-                sv.WriteLine(tsmiAutostart.Checked);
-                sv.WriteLine(labelTime.Font.Name);
-                sv.WriteLine(labelTime.Font.Size);
-            }
-        }
-
-        void LoadSettings()
-        {
-            string settingsPath = Path.Combine(Application.StartupPath, "Settings.ini");
-            if (!File.Exists(settingsPath)) return;
-
-            using (StreamReader sr = new StreamReader(settingsPath))
-            {
-                tsmiTopmost.Checked = bool.TryParse(sr.ReadLine(), out var top) ? top : false;
-                this.TopMost = tsmiTopmost.Checked;
-                tsmiShowDate.Checked = bool.TryParse(sr.ReadLine(), out var date) ? date : true;
-                checkBoxShowDate.Checked = tsmiShowDate.Checked;
-                tsmiShowWeekDay.Checked = bool.TryParse(sr.ReadLine(), out var week) ? week : true;
-                checkBoxShowWeekDay.Checked = tsmiShowWeekDay.Checked;
-                tsmiShowControls.Checked = bool.TryParse(sr.ReadLine(), out var controls) ? controls : false;
-                string hourFormat = sr.ReadLine();
-                tsmiHour_24.Checked = hourFormat == "24";
-                tsmiHour_12.Checked = hourFormat != "24";
-
-                string backColorLine = sr.ReadLine();
-                string foreColorLine = sr.ReadLine();
-                int backColor = int.TryParse(backColorLine, out var bc) ? bc : Color.Black.ToArgb();
-                int foreColor = int.TryParse(foreColorLine, out var fc) ? fc : Color.White.ToArgb();
-                labelTime.BackColor = Color.FromArgb(backColor);
-                labelTime.ForeColor = Color.FromArgb(foreColor);
-                tsmiAutostart.Checked = bool.Parse(sr.ReadLine());
-
-                string fontName = sr.ReadLine();
-                string fontSizeLine = sr.ReadLine();
-                if (string.IsNullOrWhiteSpace(fontName)) fontName = "Segoe UI";
-                float fontSize = float.TryParse(fontSizeLine, out var fs) ? fs : 32f;
-
-                try
-                {
-                    labelTime.Font = new Font(fontName, fontSize);
-                }
-                catch
-                {
-                    labelTime.Font = new Font("Segoe UI", 12f);
-                }
-            }
-        }
-
-        void SetVisibility(bool visible)
-        {
-            checkBoxShowDate.Visible = visible;
-            checkBoxShowWeekDay.Visible = visible;
-            buttonHideControls.Visible = visible;
-            this.FormBorderStyle = visible ? FormBorderStyle.FixedToolWindow : FormBorderStyle.None;
-            this.TransparencyKey = visible ? Color.Empty : this.BackColor;
-            // this.ShowInTaskbar = visible;
-        }
 
         private void buttonHideControls_Click(object sender, EventArgs e)
         {
@@ -208,7 +191,6 @@ namespace Clock
         }
         private void tsmiQuit_Click(object sender, EventArgs e)
         {
-            SaveSettings();
             this.Close();
         }
 
@@ -286,6 +268,16 @@ namespace Clock
             tsmiHour_12.Checked = false;
             //Properties.Settings.Default.Is24HourFormat = tsmiHour_24.Checked;
             //Properties.Settings.Default.Save();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveSettings();
         }
     }
 }
