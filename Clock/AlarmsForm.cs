@@ -19,12 +19,16 @@ namespace Clock
         public AlarmsForm()
         {
             InitializeComponent();
+           
+
 
         }
         public AlarmsForm(Form parent):this()
         {
+
             this.parent = parent;
             this.StartPosition = FormStartPosition.Manual;
+            lbAlarmList.Sorted = true;
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {

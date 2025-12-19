@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 //namespace Clock
 //{
 //    public class Alarm
@@ -44,6 +44,16 @@ namespace Clock
             int today = (int)DateTime.Now.DayOfWeek; 
             return (Weekdays & (1 << today)) != 0;
         }
+        public Alarm() { }
+
+        public Alarm(DateTime time, string filename, string message)
+        {
+            Time = time;
+            Filename = filename;
+            Message = message;
+            Triggered = false;
+        }
+
         public void WeekdaysFromArray(int[] days)
         {
             Weekdays = 0;
@@ -53,15 +63,46 @@ namespace Clock
                     Weekdays |= (byte)(1 << d);
             }
         }
-
-        public int CompareTo(object other)
+        public string WeekdaysToString()
         {
-            return this.Date.CompareTo((other as Alarm).Date) + this.Time.CompareTo((other as Alarm).Time);
+            string[] names = { "Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб" };
+            List<string> result = new List<string>();
+
+            for (int i = 0; i < 7; i++)
+            {
+                if ((Weekdays & (1 << i)) != 0)
+                    result.Add(names[i]);
+            }
+
+            return result.Count > 0 ? string.Join(" ", result) : "-";
         }
+
+
+        /*  public int CompareTo(object other)
+          {
+              return this.Date.CompareTo((other as Alarm).Date) + this.Time.CompareTo((other as Alarm).Time);
+          }*/
+        public int CompareTo(object obj)
+        {
+            Alarm other = obj as Alarm;
+            if (other == null) return 1;
+
+            // Сначала сравниваем дату
+            int dateCompare = this.Date.Date.CompareTo(other.Date.Date);
+            if (dateCompare != 0)
+                return dateCompare;
+
+            // Если даты одинаковые — сравниваем время
+            return this.Time.TimeOfDay.CompareTo(other.Time.TimeOfDay);
+        }
+
+
         public override string ToString()
         {
-            return $"{Date:dd.MM.yyyy} {Time:HH:mm:ss} {Weekdays} {System.IO.Path.GetFileName(Filename)} {Message}";
+            return $"{Date:dd.MM.yyyy} {Time:HH:mm:ss} [{WeekdaysToString()}] {Path.GetFileName(Filename)} {Message}";
+
         }
+
     }
 }
 

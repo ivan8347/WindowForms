@@ -32,11 +32,10 @@ namespace Clock
         {
             InitializeComponent();
 
-             LoadSettings();
             SetVisibility(false);
-           // fontDialog = new ChooseFont();
+            // fontDialog = new ChooseFont();
 
-           // tsmiShowConsole.Checked = true;
+            // tsmiShowConsole.Checked = true;
             backgrountDialog = new ColorDialog();
             foregroundDialog = new ColorDialog();
             // Console.WriteLine(Directory.GetCurrentDirectory());
@@ -47,7 +46,9 @@ namespace Clock
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(screen.Right - this.Width, screen.Top);
             alarms = new AlarmsForm(this);
+            alarms.lbAlarmList.Sorted = true;
             // tsmiTopmost.Checked = this.TopMost = true;
+            LoadSettings();
 
         }
 
@@ -86,39 +87,124 @@ namespace Clock
             sw.WriteLine($"{labelTime.ForeColor.ToArgb()}");
             sw.WriteLine($"{fontDialog.Filename}");
             sw.WriteLine($"{labelTime.Font.Size}");
+            foreach (Alarm alarm in alarms.lbAlarmList.Items)
+            {
+                string line =
+                    $"ALARM|{alarm.Date:yyyy-MM-dd}|{alarm.Time:HH:mm:ss}|{alarm.Weekdays}|{alarm.Filename}|{alarm.Message}";
+                sw.WriteLine(line);
+            }
+
             sw.Close();
-            Process.Start("notepad", "Settings.ini");
+
         }
 
         void LoadSettings()
         {
             string execution_path = Path.GetDirectoryName(Application.ExecutablePath);
             Directory.SetCurrentDirectory($"{execution_path} \\..\\..\\Fonts");
-            StreamReader sr = new StreamReader("Settings.ini");
-            string hourFormat = sr.ReadLine();
-            tsmiHour_24.Checked = hourFormat == "24";
-            tsmiHour_12.Checked = hourFormat != "24";
-            tsmiTopmost.Checked = bool.Parse(sr.ReadLine());
-            this.TopMost = tsmiTopmost.Checked;
-            tsmiShowControls.Checked = bool.Parse(sr.ReadLine());
-            SetVisibility(tsmiShowControls.Checked);
-            tsmiShowDate.Checked = bool.Parse(sr.ReadLine());
-            checkBoxShowDate.Checked = tsmiShowDate.Checked;
-            tsmiShowWeekDay.Checked = bool.Parse(sr.ReadLine());
-            checkBoxShowWeekDay.Checked = tsmiShowWeekDay.Checked;
-            tsmiShowConsole.Checked = bool.Parse(sr.ReadLine());
-            tsmiAutostart.Checked = bool.Parse(sr.ReadLine());
+            // StreamReader sr = new StreamReader("Settings.ini");
+            //    string hourFormat = sr.ReadLine();
+            //    tsmiHour_24.Checked = hourFormat == "24";
+            //    tsmiHour_12.Checked = hourFormat != "24";
+            //    tsmiTopmost.Checked = bool.Parse(sr.ReadLine());
+            //    this.TopMost = tsmiTopmost.Checked;
+            //    tsmiShowControls.Checked = bool.Parse(sr.ReadLine());
+            //    SetVisibility(tsmiShowControls.Checked);
+            //    tsmiShowDate.Checked = bool.Parse(sr.ReadLine());
+            //    checkBoxShowDate.Checked = tsmiShowDate.Checked;
+            //    tsmiShowWeekDay.Checked = bool.Parse(sr.ReadLine());
+            //    checkBoxShowWeekDay.Checked = tsmiShowWeekDay.Checked;
+            //    tsmiShowConsole.Checked = bool.Parse(sr.ReadLine());
+            //    tsmiAutostart.Checked = bool.Parse(sr.ReadLine());
 
-            labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
-            labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
-            string font_name = sr.ReadLine();
-            int font_size = (int)Convert.ToDouble(sr.ReadLine());
+            //    labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+            //    labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+            //    string font_name = sr.ReadLine();
+            //    int font_size = (int)Convert.ToDouble(sr.ReadLine());
 
-            sr.Close();
-            fontDialog = new ChooseFont(this,font_name, font_size);
-            labelTime.Font = fontDialog.Font;
+            //    sr.Close();
+            //    fontDialog = new ChooseFont(this,font_name, font_size);
+            //    labelTime.Font = fontDialog.Font;
+            //    while (!sr.EndOfStream)
+            //    {
+            //        string line = sr.ReadLine();
+            //        if (line.StartsWith("ALARM|"))
+            //        {
+            //            string[] parts = line.Split('|');
+            //            if (parts.Length == 4)
+            //            {
+            //                DateTime time = DateTime.Parse(parts[1]);
+            //                string filename = parts[2];
+            //                string message = parts[3];
+
+            //                Alarm alarm = new Alarm(time, filename, message);
+            //                alarms.lbAlarmList.Items.Add(alarm);
+            //            }
+            //        }
+            //    }
+
+            //}
+            // string path = Path.Combine(Application.StartupPath, "Fonts", "Settings.ini");
+            //if (!File.Exists(path)) return;
+
+            using (StreamReader sr = new StreamReader("Settings.ini"))
+            {
+                string hourFormat = sr.ReadLine();
+                tsmiHour_24.Checked = hourFormat == "24";
+                tsmiHour_12.Checked = hourFormat != "24";
+
+                tsmiTopmost.Checked = bool.Parse(sr.ReadLine());
+                this.TopMost = tsmiTopmost.Checked;
+
+                tsmiShowControls.Checked = bool.Parse(sr.ReadLine());
+                SetVisibility(tsmiShowControls.Checked);
+
+                tsmiShowDate.Checked = bool.Parse(sr.ReadLine());
+                checkBoxShowDate.Checked = tsmiShowDate.Checked;
+
+                tsmiShowWeekDay.Checked = bool.Parse(sr.ReadLine());
+                checkBoxShowWeekDay.Checked = tsmiShowWeekDay.Checked;
+
+                tsmiShowConsole.Checked = bool.Parse(sr.ReadLine());
+                tsmiAutostart.Checked = bool.Parse(sr.ReadLine());
+
+                labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+                labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+
+                string font_name = sr.ReadLine();
+                int font_size = int.Parse(sr.ReadLine());
+
+                fontDialog = new ChooseFont(this, font_name, font_size);
+                labelTime.Font = fontDialog.Font;
+
+                // ✅ теперь читаем будильники
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    if (line.StartsWith("ALARM|"))
+                    {
+                        string[] parts = line.Split('|');
+                        if (parts.Length >= 6)
+                        {
+                            DateTime date = DateTime.Parse(parts[1]);
+                            DateTime time = DateTime.Parse(parts[2]);
+                            byte weekdays = byte.Parse(parts[3]);
+                            string filename = parts[4];
+                            string message = parts[5];
+
+                            DateTime fullTime = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+                            var alarm = new Alarm(fullTime, filename, message)
+                            {
+                                Date = date,
+                                Weekdays = weekdays
+                            };
+
+                            alarms.lbAlarmList.Items.Add(alarm);
+                        }
+                    }
+                }
+            }
         }
-
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -172,7 +258,6 @@ namespace Clock
                         else
                         {
                             player.controls.stop();
-                            //lblStatus.Text += "\nСтоп";
                             lblStatus.Visible = false;
                             MessageBox.Show($"Стоп!!!!!");
                             nextAlarm.Triggered = false;
@@ -227,12 +312,27 @@ namespace Clock
             if (foregroundDialog.ShowDialog() == DialogResult.OK)
                 labelTime.ForeColor = foregroundDialog.Color;
         }
+        /* private void tsmiChooseFont_Click(object sender, EventArgs e)
+         {
+             if (fontDialog.ShowDialog() == DialogResult.OK)
+
+                 labelTime.Font = fontDialog.Font;
+         }*/
         private void tsmiChooseFont_Click(object sender, EventArgs e)
         {
-            if (fontDialog.ShowDialog() == DialogResult.OK)
+            // создаём диалог с текущими параметрами
+            fontDialog = new ChooseFont(
+                this,
+                fontDialog.Filename,               // текущий файл шрифта
+                (int)labelTime.Font.Size           // текущий размер
+            );
 
-                labelTime.Font = fontDialog.Font;
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                labelTime.Font = fontDialog.Font;  // ✅ обновляем шрифт
+            }
         }
+
         //[DllImport("kernel32.dll")]
         //public static extern bool AllocConsole();
         //[DllImport("kernel32.dll")]
@@ -278,10 +378,8 @@ namespace Clock
             //Properties.Settings.Default.Save();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
+        private void MainForm_Load(object sender, EventArgs e) { }
 
-        }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
