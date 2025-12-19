@@ -30,9 +30,10 @@ namespace Clock
             //numericUpDownFontSize.Value = 32;
         }
 
-        public ChooseFont(string font_name, int font_size) 
+        public ChooseFont(MainForm parent,string font_name, int font_size) 
         {
             InitializeComponent();
+            this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - parent.Width - this.Width,parent.Location.Y);
             Filename = font_name;
             numericUpDownFontSize.Value = font_size;
             LoadFonts();
@@ -65,7 +66,7 @@ namespace Clock
          }*/
         void LoadFonts()
         {
-            //Directory.SetCurrentDirectory("..\\..\\Fonts");
+           // Directory.SetCurrentDirectory("..\\..\\Fonts");
             Console.WriteLine(Directory.GetCurrentDirectory());
 
             comboBoxFont.Items.AddRange(GetFontsFormat("*.ttf"));

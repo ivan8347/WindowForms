@@ -130,6 +130,7 @@
             this.Controls.Add(this.numericUpDownFontSize);
             this.Controls.Add(this.comboBoxFont);
             this.Name = "ChooseFont";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ChooseFont";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
             this.ResumeLayout(false);
