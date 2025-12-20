@@ -95,6 +95,7 @@ namespace Clock
             }
 
             sw.Close();
+            Process.Start("notepad", "Settings.ini");
 
         }
 
