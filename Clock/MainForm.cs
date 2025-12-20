@@ -26,31 +26,40 @@ namespace Clock
         AlarmsForm alarms;
         Alarm nextAlarm;
         private WMPLib.WindowsMediaPlayer player;
+        bool eyesOpen = true;
+        Timer blinkTimer;
+        Timer clockTimer;
+
 
         public MainForm()
         {
             InitializeComponent();
+
 
            // bool savedFormat = Properties.Settings.Default.Is24HourFormat;                      // Формат времени
             //tsmiHour_24.Checked = !savedFormat;
             //tsmiHour_12.Checked = savedFormat;
            // LoadSettings();
             SetVisibility(true);
+            Form1 f = new Form1();
+            f.Show();        // окно откроется и будет работать
+            
 
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.BackColor = Color.Magenta;
-            this.TransparencyKey = this.BackColor;
-            this.DoubleBuffered = true;
-            this.Width = 300;
-            this.Height = 400;
 
-            SetBunnyShape();
+            // this.FormBorderStyle = FormBorderStyle.None;
+            // this.BackColor = Color.Magenta;
+            // this.TransparencyKey = this.BackColor;
+            // this.DoubleBuffered = true;
+            // this.Width = 300;
+            // this.Height = 400;
 
-            labelTime.Font = new Font("Segoe UI", 20, FontStyle.Bold);
-            labelTime.ForeColor = Color.Black;
-            labelTime.BackColor = Color.Transparent;
-            labelTime.AutoSize = true;
-            labelTime.Location = new Point((this.Width - labelTime.Width) / 2, 170);
+            // SetBunnyShape();
+
+            //labelTime.Font = new Font("Segoe UI", 20, FontStyle.Bold);
+            //labelTime.ForeColor = Color.Black;
+            //labelTime.BackColor = Color.Transparent;
+            //labelTime.AutoSize = true;
+            //labelTime.Location = new Point((this.Width - labelTime.Width) / 2, 170);
 
 
 
@@ -69,7 +78,7 @@ namespace Clock
             this.Location = new Point(screen.Right - this.Width, screen.Top);
             alarms = new AlarmsForm(this);
              tsmiTopmost.Checked = this.TopMost = true;
-            tsmiShowControls.Checked  = true;
+            //tsmiShowControls.Checked  = true;
             //tsmiShowControls.Checked = visible;
         }
 
@@ -147,8 +156,8 @@ namespace Clock
         {
             checkBoxShowDate.Visible = visible;
             checkBoxShowWeekDay.Visible = visible;
-            //buttonHideControls.Visible = visible;
-           // tsmiShowControls.Checked = visible;
+           buttonHideControls.Visible = visible;
+          // tsmiShowControls.Checked = visible;
             this.FormBorderStyle = visible ? FormBorderStyle.FixedToolWindow : FormBorderStyle.None;
             this.TransparencyKey = visible ? Color.Empty : this.BackColor;
             // this.ShowInTaskbar = visible;
@@ -247,48 +256,48 @@ namespace Clock
            // Properties.Settings.Default.Is24HourFormat = tsmiHour_24.Checked;
             Properties.Settings.Default.Save();
         }
-        private void SetBunnyShape()
-        {
-            GraphicsPath path = new GraphicsPath();
-
-            // Голова
-            path.AddEllipse(50, 100, 200, 200);
-
-            // Левое ухо
-            path.AddEllipse(80, 0, 40, 120);
-
-            // Правое ухо
-            path.AddEllipse(180, 0, 40, 120);
-
-            this.Region = new Region(path);
-        }
-        protected override void OnPaint(PaintEventArgs e)
-         {
-             base.OnPaint(e);
-             Graphics g = e.Graphics;
-             g.SmoothingMode = SmoothingMode.AntiAlias;
-
-             /*   // Время
-                string time = DateTime.Now.ToString(tsmiHour_24.Checked ? "HH:mm:ss" : "hh:mm:ss tt");
-                using (Font font = new Font("Segoe UI", 24, FontStyle.Bold))
-                using (Brush brush = new SolidBrush(Color.Black))
-                {
-                    SizeF size = g.MeasureString(time, font);
-                    g.DrawString(time, font, brush, (Width - size.Width) / 2, 160);
-                }*/
-           //  labelTime.Text = DateTime.Now.ToString(tsmiHour_24.Checked ? "HH:mm:ss" : "hh:mm:ss tt");
-             // Глазки
-             g.FillEllipse(Brushes.Black, 110, 140, 10, 10);
-             g.FillEllipse(Brushes.Black, 180, 140, 10, 10);
-
-             // Носик
-             Point[] nose = { new Point(145, 160), new Point(155, 160), new Point(150, 170) };
-             g.FillPolygon(Brushes.Black, nose);
-
-             // Щёчки
-             g.FillEllipse(Brushes.Pink, 95, 155, 20, 20);
-             g.FillEllipse(Brushes.Pink, 185, 155, 20, 20);
-         }
+       // private void SetBunnyShape()
+       // {
+          //  GraphicsPath path = new GraphicsPath();
+          //
+          //  // Голова
+          //  path.AddEllipse(50, 100, 200, 200);
+          //
+          //  // Левое ухо
+          //  path.AddEllipse(80, 0, 40, 120);
+          //
+          //  // Правое ухо
+          //  path.AddEllipse(180, 0, 40, 120);
+          //
+          //  this.Region = new Region(path);
+       // }
+       // protected override void OnPaint(PaintEventArgs e)
+       //  {
+            // base.OnPaint(e);
+            // Graphics g = e.Graphics;
+            // g.SmoothingMode = SmoothingMode.AntiAlias;
+            //
+            // /*   // Время
+            //    string time = DateTime.Now.ToString(tsmiHour_24.Checked ? "HH:mm:ss" : "hh:mm:ss tt");
+            //    using (Font font = new Font("Segoe UI", 24, FontStyle.Bold))
+            //    using (Brush brush = new SolidBrush(Color.Black))
+            //    {
+            //        SizeF size = g.MeasureString(time, font);
+            //        g.DrawString(time, font, brush, (Width - size.Width) / 2, 160);
+            //    }*/
+           ////  labelTime.Text = DateTime.Now.ToString(tsmiHour_24.Checked ? "HH:mm:ss" : "hh:mm:ss tt");
+            // // Глазки
+            // g.FillEllipse(Brushes.Black, 110, 140, 10, 10);
+            // g.FillEllipse(Brushes.Black, 180, 140, 10, 10);
+            //
+            // // Носик
+            // Point[] nose = { new Point(145, 160), new Point(155, 160), new Point(150, 170) };
+            // g.FillPolygon(Brushes.Black, nose);
+            //
+            // // Щёчки
+            // g.FillEllipse(Brushes.Pink, 95, 155, 20, 20);
+            // g.FillEllipse(Brushes.Pink, 185, 155, 20, 20);
+         //}
       /*  protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
